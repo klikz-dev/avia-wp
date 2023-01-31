@@ -1,0 +1,31 @@
+{% macro comparisonTable(data, options) %}
+    <div class="py-12">
+
+        <h3 class="font-display text-xl text-green-200 font-medium text-center">{{ data.title|e }}</h3>
+
+        <h5 class="mb-8 font-display font-medium text-lg text-blue-500 text-center">{{ data.intro|e }}</h5>
+
+        <div class="flex flex-col md:flex-row md:-mx-16">
+        
+            <div class="md:w-1/2 py-6 px-16 mb-10 bg-blue-50 list-desc">
+                <h4 class="mb-4 font-display text-xl text-green-200 text-center">{{ data.headers.left_header|e }}</h3>
+                <ul class="flex flex-col justify-center">
+                    {% for field in data.fields %}
+                        <li class="font-display mb-4">{{ field.left|e }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="md:w-1/2 py-6 px-16 mb-10 bg-blue-200 list-desc">
+                <h4 class="mb-4 font-display text-xl text-green-200 text-center">{{ data.headers.right_header|e }}</h3>
+                <ul class="flex flex-col justify-center">
+                    {% for field in data.fields %}
+                        <li class="font-display mb-4 font-medium">{{ field.right|e }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        
+        </div>
+
+    </div>
+{% endmacro %}

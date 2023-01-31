@@ -1,0 +1,22 @@
+{% macro callout(data, options) %}
+{% from 'macros/button.twig' import button %}
+  <div class="py-32">
+    <div class="mx-auto callout">
+      <div class="flex flex-col md:flex-row justify-center items-center">
+        <div class="w-2/6 md:mr-24">
+          <img class="mb-16 md:mb-0" src="{{ Image(data.image).src|e('esc_url') }}" alt="{{ Image(data.image).alt|e }}" />
+        </div>
+        <div class="w-4/6 text-center md:text-left">
+          <p class="mb-10 font-display font-medium text-lg md:text-xl text-blue-500">{{ data.title|e }}</p>
+          {{ button({
+            markup: 'a',
+            size: 'sm',
+            theme: 'tertiary',
+            title: data.link.title,
+            url: data.link.url
+          }) }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

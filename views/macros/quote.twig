@@ -1,0 +1,44 @@
+{% macro quote(data, options) %}
+  <div class="mb-32">
+    <div class="color-field-blue-bg-50-up -mb-1"></div>
+    <div class="bg-blue-50 py-24 md:py-32">
+      <div class="container mx-auto px-12">
+        <div class="md:flex mb-24 text-center md:text-left px-48 md:px-0">
+          <div class="md:w-1/12"></div>
+          <div class="md:w-11/12">
+          {% if data.heading %}
+            <h4 class="font-display font-bold text-xs uppercase tracking-widest text-gray-500">{{ data.heading|e }}</h4>
+          {% endif %}
+          </div>
+        </div>
+        <div class="md:flex">
+          <div class="md:w-1/12 mb-10 md:mb-0">
+            <svg width="35" height="31" viewBox="0 0 35 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.944 30.28H.014V18.014c0-4.517.94-8.081 2.82-10.694C4.713 4.707 7.936 2.4 12.5.398l3.443 6.519c-2.808 1.318-4.749 2.636-5.823 3.955-1.074 1.293-1.672 2.832-1.794 4.614h7.617V30.28zm18.567 0H18.58V18.014c0-4.517.94-8.081 2.82-10.694 1.88-2.612 5.102-4.92 9.667-6.921l3.443 6.519c-2.808 1.318-4.749 2.636-5.823 3.955-1.074 1.293-1.672 2.832-1.794 4.614h7.617V30.28z" fill="#A9D1D5" opacity=".75"/></svg>
+          </div>
+          <div class="md:w-11/12">
+            <blockquote>
+              <div class="blockquote">
+                {{ data.quote|e('wp_kses_post') }}
+              </div>
+              <footer class="flex items-center">
+                {% if data.attribution_image %}
+                <img class="rounded-full h-32 w-32" src="{{ Image(data.attribution_image).src|e('esc_url') }}" alt="{{ Image(data.attribution_image).alt|e }}" />
+                {% endif %}
+                {% if data.attribution_line_one or data.attribution_line_two %}
+                  <div class="ml-10 max-w-lg">
+                    {% if data.attribution_line_one %}
+                      <p class="mb-2 font-body text-tiny font-semibold text-gray-500">{{ data.attribution_line_one|e }}</p>
+                    {% endif %}
+                    {% if data.attribution_line_two %}
+                      <p class="font-body text-tiny font-semibold text-gray-100">{{ data.attribution_line_two|e }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

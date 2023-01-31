@@ -1,0 +1,7 @@
+{% macro richText(data, options ) %}
+  <div class="container-wide mx-auto px-12">
+    <div class="wysiwyg wysiwyg-three">
+      {{ data.text|e('wp_kses_post') }}
+    </div>
+  </div>
+{% endmacro %}

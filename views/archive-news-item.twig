@@ -1,0 +1,71 @@
+{% from 'macros/filters.twig' import filters %}
+{% from 'macros/marquee.twig' import marquee %}
+{% from 'macros/media-one.twig' import mediaOne %}
+{% from 'macros/media-three.twig' import mediaThree %}
+{% from 'macros/pagination.twig' import pagination %}
+
+{% extends 'base.twig' %}
+
+{% block main %}
+ {{ marquee({
+    title: post.meta('marquee').title,
+    text: post.meta('marquee').text,
+    siteUrl: site.url,
+    noParent: true,
+    page: {
+      title: post.title,
+      slug: site.url ~ '/' ~ post.slug
+    },
+    parent: {
+      slug: site.url ~ '/' ~ post.slug
+    }
+  }) }}
+    <div class="container mx-auto px-10 md:px-24">
+      <div class="md:flex md:-mx-10 mb-24 justify-end md:px-10">
+        <form method="get" class="md:flex" role="search" action="{{ site.url }}">
+          <input type="text" class="transition ease-in-out duration-150 inline-block font-display border-solid border-blue-400 text-blue-400 border-2 py-8 px-8 text-xs" placeholder="{{post.meta('search_placeholder')}}" name="s" size="30" maxlength="40" onchange="" onfocus="">
+          <input type="hidden" name="post_type" value="news-item">
+          <input type="submit" value="Search" class="transition ease-in-out duration-150 inline-block font-display font-bold uppercase tracking-widest border-solid border-blue-400 text-blue-400 border-2 hover:bg-blue-50 py-8 px-8 text-xs">
+        </form>
+      </div>
+
+      <div class="md:flex md:-mx-10">
+        <div class="md:w-4/6 md:px-10">
+          <h3 class="mb-12 font-display font-bold text-sm uppercase tracking-widest text-gray-500">
+            {{ post.featured_post_headline|e }}
+          </h3>
+          {% for item in posts|slice(0, 1) %}
+            {{ mediaOne({
+              title: item.title,
+              date: item.date,
+              byline: item.byline,
+              url: item.link
+            }) }}
+          {% endfor %}
+        </div>
+        <div class="md:w-2/6 md:px-10" data-role="filters-target">
+          {{ filters({
+            categories: categories,
+            title: 'Popular Topics',
+            query: query,
+            path: '/news/?news-topic='
+          }) }}
+        </div>
+      </div>
+      <div class="md:flex md:flex-wrap md:-mx-10">
+        {% for item in posts|slice(1, posts.length) %}
+          <div class="md:w-1/2 md:px-10">
+            {{ mediaThree({
+              title: item.title,
+              date: item.date,
+              byline: item.byline,
+              url: item.link
+            }) }}
+          </div>
+        {% endfor %}
+      </div>
+    {{ pagination({
+      posts: posts.pagination
+    }) }}
+  </div>
+{% endblock %}

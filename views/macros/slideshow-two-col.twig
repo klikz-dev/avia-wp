@@ -1,0 +1,52 @@
+{% macro slideshowTwoCol(data, options) %}
+  {% from 'macros/button.twig' import button %}
+  <div class="container mx-auto px-12 md:px-24 mb-40" data-component="slideshow-two-col">
+    <div class="mb-5 mx-auto max-w-6xl text-center">
+      <h3 class="mb-5 font-display text-xl text-blue-500 font-medium">{{ data.title|e }}</h3>
+      <p class="font-body text-tiny text-gray-500">{{ data.lede|e }}</p>
+    </div>
+    <div class="relative mb-10">
+      <div class="md:mx-24">
+        <div class="mb-2 swiper-container" data-role="slideshow-two-col-slides">
+          <div class="swiper-wrapper">
+          {% if data.images %}
+            {% for slide in data.images|batch(8) %}
+              <div class="swiper-slide"{% if data.autoplay %} data-swiper-autoplay="{{ data.delay }}"{% else %} data-swiper-autoplay="999999999"{% endif %}>
+                <div class="flex -mx-12">
+                  {% for i in slide|batch(2) %}
+                    <div class="w-1/4 px-12">
+                      {% for s in i %}
+                        <img src="{{ Image(s).src|e('esc_url') }}" alt="{{ Image(s).alt|e }}" />
+                      {% endfor %}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+          </div>
+        </div>
+        <div class="hidden md:flex absolute top-0 bottom-0 left-0 p-1 slideshow-prev items-center" data-role="slideshow-two-col-prev">
+          <button class="sr-only">prev</button>
+          <svg width="16" height="58" viewBox="0 0 16 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 1.167l-13 28 13 28" stroke="#264B5B" stroke-width="2"/></svg>
+        </div>
+        <div class="hidden md:flex absolute top-0 right-0 bottom-0 p-1 slideshow-next items-center" data-role="slideshow-two-col-next">
+          <button class="sr-only">next</button>
+          <svg width="16" height="58" viewBox="0 0 16 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 57.167l13-28-13-28" stroke="#264B5B" stroke-width="2"/></svg>
+        </div>
+      </div>
+    </div>
+    {# Pagination #}
+    <div class="flex justify-center items-center pb-12" data-role="slideshow-two-col-pagination"></div>
+    {% if data.link %}
+      <div class="text-center">
+        {{ button({
+          markup: 'a',
+          theme: 'primary',
+          title: data.link.title,
+          url: data.link.url
+        }) }}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

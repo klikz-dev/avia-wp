@@ -1,0 +1,32 @@
+{% macro mediaOne(data, options) %}
+  <article class="mb-24">
+    <a class="media" href="{{ data.url|e('esc_url') }}">
+      {% if data.image %}
+        <div>
+          <img class="mb-10" src="{{ data.image.src|e('esc_url') }}" alt="{{ data.image.alt|e }}" />
+        </div>
+      {% endif %}
+      {% if data.date %}
+        <time class="block mb-4 font-body font-semibold text-sm text-gray-500">{{ data.date|e }}</time>
+      {% endif %}
+      {% if data.eventDate %}
+        {% if data.eventDate >= "now"|date("Ymd") %}
+          <span class="rounded-full mb-6 inline-block font-display font-bold text-sm uppercase tracking-widest text-blue-400 bg-blue-50 py-4 px-8">
+            Upcoming
+          </span>
+        {% else %}
+          <span class="rounded-full mb-6 inline-block font-display font-bold text-sm uppercase tracking-widest text-gray-200 border-solid border-2 border-tan-75 py-4 px-8">
+            Past
+          </span>
+        {% endif %}
+      {% endif %}
+      <h1 class="media-title mb-4 text-lg md:text-xl font-medium text-blue-500">{{ data.title|e('wp_kses_post') }}</h1>
+      {% if data.byline %}
+        <p class="font-body font-semibold text-tiny text-gray-100">{{ data.byline|e }}</p>
+      {% endif %}
+      {% if data.dateTwo %}
+        <p class="font-body font-semibold text-tiny text-gray-100">{{ data.dateTwo|e }}</p>
+      {% endif %}
+    </a>
+  </article>
+{% endmacro %}

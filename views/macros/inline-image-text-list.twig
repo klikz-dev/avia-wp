@@ -1,0 +1,15 @@
+{% macro inlineList(data, options) %}
+    <div class="pt-4">
+        {% for list in data.list %}
+        <div class="mb-12 md:flex md:-mx-5">
+            <div class="md:px-5 md:w-1/5">
+                <img class="mb-10 md:mb-0" src="{{ Image(list.image).src|e('esc_url') }}" alt="{{ Image(list.image).alt|e }}" />
+            </div>
+        
+            <div class="wysiwyg md:px-5 md:w-4/5">
+                {{ list.text|e('wp_kses_post') }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

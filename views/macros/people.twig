@@ -1,0 +1,38 @@
+{% macro people(data, options) %}
+  {% if data.background == 'primary' %}
+    <div class="color-field-tan-bg-75 -mb-1"></div>
+  {% endif %}
+  <div class="{% if data.background == 'primary' %}bg-tan-75{% endif %} py-32">
+
+    <div class="container mx-auto px-4 lg:px-32" data-component="grid">
+        <h3 class="text-center mb-12 font-display font-bold text-sm uppercase tracking-widest text-gray-500">
+          {{ data.heading|e }}
+        </h3>
+      {% for group in data.people|batch(4) %}
+        <div class="flex flex-wrap items-center justify-center items-baseline md:-mx-10" data-role="grid-group">
+          {% for item in group %}
+            <button class="profile flex items-center justify-center sm:w-1/2 md:w-1/4 md:px-10 py-10 mb-10" data-role="grid-trigger" data-id="{{ item.id|e }}">
+              <div class="mb-24">
+                <div class="mb-16">
+                  <img class="mx-auto" src="{{ Image(item.image).src|e('esc_url') }}" alt="{{ Image(item.image).alt|e }}">
+                </div>
+
+                <div class="text-center">
+                  <div class="{% if item.unexpected_talent %}mb-10 pb-16 border-b border-tan-100{% endif %}">
+                    <h4 class="profile-title font-display font-medium text-lg text-blue-500">{{ item.title|e }}</h4>
+                    <p class="font-display text-md text-green-200 font-semibold">{{ item.position|e }}</p>
+                  </div>
+                  {% if item.unexpected_talent %}
+                  <p class="font-display text-md text-gray-200 font-medium">My unexpected talent:</p>
+                  <p class="font-display text-md text-gray-100 font-regular">{{ item.unexpected_talent|e }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </button>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endmacro %}

@@ -1,0 +1,59 @@
+{% macro bullets(data) %}
+    {% from 'macros/button.twig' import button %}
+     <div class="color-field-tan-bg-100 -mb-1 -mt-12"></div>
+    <div style="background-color: #ebe9e5"> 
+        <div class="container mx-auto px-12 md:px-24 mx-32 py-16">
+            {% if data.title %}
+                <div class="mb-20 mx-auto">
+                    <h3 class="mb-10 font-display text-xl text-blue-500 font-medium">{{ data.title|e }}</h3>
+                  
+                </div>
+            {% endif %}
+            {% if data.intro %}
+             <div class="mb-10 mx-auto">
+                <p class="font-body text-tiny">{{ data.intro|e }}</p>
+             </div>
+            {% endif %}
+            {% if data.lists %}
+                <div class="mb-10 mx-auto">
+                {% if data.subtitle %}
+                        <p class="mb-4 font-display text-lg font-medium text-green-200">{{ data.subtitle|e }}</p>
+                {% endif %}
+                    <div class="list-desc md:flex">
+                    {% for i in 0..(data.list_column_number-1) %}
+                        <ul class="md:w-1/{{data.list_column_number}} px-12">
+                            {% for list in data.lists %}
+                            {% if loop.index % data.list_column_number ==  i %}
+                                <div class="flex items-center mb-4">
+                                    <li class="font-body text-tiny text-gray-500">{{ list.list|e }}</li>
+                                </div>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                        
+                    </div>
+                </div>
+            {% endif %}
+            {% if data.cta_title%}
+            
+                <div class="mb-10 mx-auto">
+                <h1 class="media-title mb-4 text-base md:text-lg font-medium text-blue-500">{{ data.cta_title|e }}</h1>
+
+                </div>
+            {% endif %}
+            {% if data.cta %}
+            <div class="mb-5">
+                {{ button({
+                markup: 'a',
+                size: 'sm',
+                theme: 'secondary',
+                title: data.cta.title,
+                url: data.cta.url
+                }) }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endmacro %}

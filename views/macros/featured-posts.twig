@@ -1,0 +1,43 @@
+{% macro featuredPosts(data, options) %}
+    {% from 'macros/media-three.twig' import mediaThree %}
+    {% from 'macros/button.twig' import button %}
+
+    <div class="container mx-auto px-12 md:px-24 mx-32 py-16">
+        {% if data.title %}
+        <div class="mb-20">
+            <h3 class="mb-10 font-display text-xl text-blue-500 font-medium">{{ data.title|e }}</h3>
+        </div>
+        {% endif %}
+
+        {% if data.posts %}
+        <div class="md:flex md:flex-wrap md:-mx-10" data-role="filters-target">
+        {% for post in data.posts %}
+            <div class="md:w-1/2 md:px-10">
+            {% set image = Image(post.post.image) %}
+            {{ mediaThree({
+                title: post.post.title,
+                byline: post.custom_byline ? post.custom_byline : post.post.byline,
+                url: post.post.link,
+                image: {
+                src: image.src('insight_thumbnail_below_fold'),
+                alt: image.alt
+                }
+            }) }}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if data.explore_more_btn.title %}
+        <div class="text-center">
+            {{ button({
+            markup: 'a',
+            size: 'sm',
+            theme: data.button_style ? data.button_style : 'primary',
+            title: data.explore_more_btn.title,
+            url: data.explore_more_btn.url
+            }) }}
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}

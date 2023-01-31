@@ -1,0 +1,42 @@
+{% extends 'base.twig' %}
+{% from 'macros/button.twig' import button %}
+
+{% block main %}
+  <div>
+    <div class="relative bg-blue-100 pt-2 pb-54">
+      <div class="container mx-auto px-4">
+        <div class="z-10 relative text-center">
+          <h2 class="mt-10 lg:mt-0 px-24 md:px-0 mb-6 font-display font-medium text-4xl md:text-5xl leading-snug text-blue-500 max-w-8xl mx-auto">{{ post.meta('hero').title|e }}</h2>
+          <div class="mb-12 max-w-xl md:max-w-4xl mx-auto text-center">
+            <p class="px-24 md:px-0 font-display font-normal text-base text-gray-500 leading-relaxed">{{ post.meta('hero').text_one|e }}</p>
+            <p class="px-24 md:px-0 font-display font-normal text-base text-gray-500 leading-relaxed">{{ post.meta('hero').text_two|e }}</p>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <img role="presentation" class="w-full md:w-4/12 z-0 bottom-0 left-0 md:absolute" style="max-width: 400px;" src="{{ Image(post.meta('hero').image_left) }}" alt="">
+        </div>
+        <div class="hidden md:block">
+          <img role="presentation" class="w-full md:w-4/12 z-0 bottom-0 right-0 md:absolute" style="max-width: 400px;" src="{{ Image(post.meta('hero').image_right) }}" alt="">
+        </div>
+        <div class="pb-12 pt-16 md:pt-0 relative z-10 flex justify-center">
+          {% if post.meta('hero').cta_button.title %}
+            {{ button({
+              markup: 'a',
+              size: 'sm',
+              theme: post.meta('hero').cta_button_style ? post.meta('hero').cta_button_style : 'primary',
+              title: post.meta('hero').cta_button.title,
+              url: post.meta('hero').cta_button.url
+            }) }}
+          {% else %}
+            <a class="down" data-component="link" href="#body">
+              <svg width="58" height="16" viewBox="0 0 58 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l28 13L57 1" stroke="#5D6160" stroke-width="2"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="color-field-blue-bg-25"></div>
+  </div>
+  <div id="body"></div>
+  {% include 'includes/components.twig' %}
+{% endblock %}

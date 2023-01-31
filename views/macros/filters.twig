@@ -1,0 +1,19 @@
+{% macro filters(data, options) %}
+  <div class="bg-blue-50 p-10 mb-10">
+    <div data-component="filters" {% if data.query %}class="is-active"{% endif %}>
+      <h3 class="mb-12 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ data.title|e }}</h3>
+      <form data-role="filters-form" data-path="{{ data.path }}">
+        <div>
+          {% for category in data.categories %}
+            <div class="flex items-center mb-4">
+              <input data-role="filters-control" class="mr-3" type="checkbox" id="{{ category.slug|e }}" name="category_name" value="{{ category.slug|e }}"
+              {% if avia_in_string(data.query, category.slug) %}checked="checked" {% endif %}>
+              <label for="{{ category.slug|e }}">{{ category.name|e }}</label>
+            </div>
+          {% endfor %}
+        </div>
+        <button class="sr-only" type="submit">Filter</button>
+      </form>
+    </div>
+  </div>
+{% endmacro %}

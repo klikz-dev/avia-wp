@@ -1,0 +1,60 @@
+{% macro videoContent(data, options) %}
+{% from 'macros/button.twig' import button %}
+  <div class="container mx-auto mb-24 px-12 md:px-24">
+    <div class="mb-10 mx-auto max-w-5xl text-center">
+      {% if data.lede %}
+        <p class="font-display font-medium text-lg text-blue-500">{{ data.lede|e }}</p>
+      {% endif %}
+    </div>
+    {% if data.video_placeholder and data.embed_url %}
+      <div class="relative mb-24" data-component="video">
+        <div class="video-placeholder" data-role="video-placeholder" style="background-image: url('{{ Image(data.video_placeholder).src }}');">
+          <button data-role="video-play" class="h-40 w-40 flex justify-center items-center bg-blue-200 rounded-full font-display text-xs text-blue-400 font-bold tracking-widest uppercase">
+            <div class="flex items-center">
+              <svg class="mr-3" width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5L.25 9.33V.67L7 5z" fill="#264B5B"/></svg>
+              <span>Play</span>
+            </div>
+          </button>
+        </div>
+        <div data-role="video-frame">
+          <iframe src="{{ data.embed_url|e('esc_url') }}"></iframe>
+        </div>
+      </div>
+    {% endif %}
+    <div class="mb-24 text-center">
+      {% if data.title %}
+        <p class="mb-4 font-display font-medium text-xl text-green-200">{{ data.title|e }}</p>
+      {% endif %}
+      {% if data.heading %}
+        <p class="font-body text-base font-medium text-gray-500">{{ data.heading|e }}</p>
+      {% endif %}
+    </div>
+    <div class="md:flex mb-24 -mx-12">
+      <div class="md:w-1/2 px-12">
+        <div class="wysiwyg wysiwyg-one">
+         {{ data.rich_text_one|e('wp_kses_post') }}
+        </div>
+      </div>
+      <div class="md:w-1/2 px-12">
+        <div class="wysiwyg wysiwyg-one">
+          {{ data.rich_text_two|e('wp_kses_post') }}
+        </div>
+      </div>
+    </div>
+    {% if data.link %}
+      <div class="mb-24 text-center">
+        {{ button({
+          markup: 'a',
+          theme: 'secondary',
+          title: data.link.title,
+          url: data.link.url
+        }) }}
+      </div>
+    {% endif %}
+    {% if data.small_text %}
+      <div class="text-center md:px-40">
+        <p class="font-body text-gray-100">{{ data.small_text|e }}</p>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

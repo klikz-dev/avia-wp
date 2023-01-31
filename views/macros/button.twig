@@ -1,0 +1,44 @@
+{% macro button(data, options) %}
+
+
+  {% if data.theme == 'primary' %}
+    {% set theme = 'bg-blue-500 text-white hover:bg-blue-300' %}
+  {% elseif data.theme == 'secondary' %}
+    {% set theme = 'bg-blue-200 text-blue-500 hover:bg-teal-100' %}
+  {% elseif data.theme == 'tertiary' %}
+    {% set theme = 'border-solid border-blue-400 text-blue-400 border-2 hover:bg-blue-50' %}
+  {% endif %}
+
+  {% if data.size == 'sm' %}
+    {% set size = 'py-8 px-8 text-xs' %}
+  {% else %}
+    {% set size = 'text-sm py-12 px-16' %}
+  {% endif %}
+
+
+  <{{ data.markup }} class="transition ease-in-out duration-150 inline-block font-display font-bold uppercase tracking-widest {{ theme }} {{ size }}"
+  {% if data.markup == 'a' %}href="{{ data.url|e('esc_url') }}"{% endif %} {% if data.type == 'button' %}type="submit"{% endif %}
+    {% if data.target %}target="_blank" rel="noopener noreferrer" {% endif %}>
+    <div class="flex items-center">
+      <span class="mr-6">{{ data.title|e }}</span>
+      {% if data.buttonType == 'download' %}
+        <svg class="pb-1" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.485 4.243L5.243 8.485 1 4.243"
+        {% if data.theme == 'primary' %}
+          stroke="#FFF"
+        {% else %}
+          stroke="#264B5B"
+        {% endif %}
+        stroke-width="2.5"/></svg>
+      {% else %}
+        <svg class="pb-1"width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.243 1.757L8.485 6l-4.242 4.243"
+        {% if data.theme == 'primary' %}
+          stroke="#FFF"
+        {% else %}
+          stroke="#264B5B"
+        {% endif %}
+        stroke-width="2.5"/></svg>
+      {% endif %}
+    </div>
+  </{{ data.markup }}>
+{% endmacro %}

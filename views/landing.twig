@@ -1,0 +1,76 @@
+{% from 'macros/marquee.twig' import marquee %}
+{% from 'macros/button.twig' import button %}
+{% from 'macros/media-two.twig' import mediaTwo %}
+
+{% extends 'base.twig' %}
+
+{% block main %}
+  {{ marquee({
+    title: post.meta('marquee').title,
+    text: post.meta('marquee').text,
+    page: {
+      title: post.title,
+      slug: site.url ~ '/' ~ post.slug
+    },
+    parent: {
+      title: Post(post.post_parent).title,
+      slug: site.url ~ '/' ~ Post(post.post_parent).slug
+    }
+  }) }}
+  {% if post.content %}
+    <div class="container-wide mx-auto px-12 md:px-40">
+      <div class="wysiwyg-four">
+        {{ post.content|e('wp_kses_post') }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if post.meta('sidebar') %}
+    <div class="container mx-auto px-10 md:px-48 mb-8">
+      <div class="flex flex-col md:flex-row md:-mx-24">
+        <div class="md:w-4/6 md:px-24">
+          {% include 'includes/components.twig' %}
+        </div>
+
+        <div class="md:w-2/6 md:px-24">
+          {% for component in post.meta('sidebar') %}
+            {% if component.acf_fc_layout == 'callout' %}
+              <div class="mb-8">
+                {% if component.image %}
+                <img class="mb-10" src="{{ Image(component.image).src|e('esc_url') }}" alt="{{ Image(component.image).alt|e }}" />
+                {% endif %}
+                <h5 class="mb-8 font-display font-medium text-lg text-blue-500">{{ component.title|e }}</h5>
+                <p class="mb-10 font-body text-gray-500">{{ component.text|e }}</p>
+                {{ button({
+                  markup: 'a',
+                  size: 'sm',
+                  theme: 'tertiary',
+                  title: component.link.title,
+                  url: component.link.url
+                }) }}
+              </div>
+            {% elseif component.acf_fc_layout == 'featured_insights' %}
+              <h3 class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ _e('Related Insights') }}</h3>
+              {% for item in component.posts %}
+                {% set post = Post(item) %}
+                {{ mediaTwo({
+                  title: post.title,
+                  date: post.date,
+                  byline: post.byline,
+                  url: post.link,
+                  image: {
+                    src: Image(post.image).src('insight_thumbnail_related_aside'),
+                    alt: Image(post.image).alt
+                  }
+                }) }}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    {% include 'includes/components.twig' %}
+  {% endif %}
+  
+{% endblock %}

@@ -1,0 +1,63 @@
+{% macro slideshow(data, options) %}
+{% from 'macros/button.twig' import button %}
+  <div class="container mx-auto px-4 mb-32" data-component="slideshow">
+    {# Header #}
+    <div class="mb-24 text-center">
+      <h5 class="max-w-6xl mx-auto mb-16 font-display font-medium text-4xl md:text-5xl leading-snug text-blue-500">{{ data.title|e }}</h5>
+      <p class="max-w-4xl px-24 md:px-0 mx-auto font-display font-normal text-base text-gray-500 leading-relaxed">{{ data.text|e }}</p>
+    </div>
+    {# Body #}
+    <div class="relative">
+      <div class="relative md:mx-24 px-20 py-20 lg:px-20 md:pb-24 md:pt-32 border-solid border-black border-4">
+        {# Title #}
+        <div class="absolute top-0 right-0 left-0 flex justify-center items-center">
+          <div class="-mt-12">
+            <p class="py-6 px-12 inline-block border-black border-2 font-display text-sm text-gray-500 bg-white uppercase tracking-widest font-bold">{{ data.slideshow_title|e }}</p>
+          </div>
+        </div>
+        {# Slides #}
+        <div class="swiper-container" data-role="slideshow-slides">
+          <div class="swiper-wrapper">
+            {% for slide in data.slides %}
+              <div class="swiper-slide">
+                <div class="md:flex md:-mx-10">
+                  <div class="md:w-1/2 xl:w-1/3 md:px-10">
+                    <img class="mb-10" src="{{ Image(slide.image).src|e('esc_url') }}" alt="{{ Image(slide.image).alt|e }}" />
+                  </div>
+                  <div class="md:w-1/2 xl:w-2/3 md:px-10">
+                    <div class="mb-10">
+                      <p class="mb-10 font-display font-medium text-2xl md:text-lg lg:text-4xl leading-snug text-blue-300">{{ slide.title|e }}</p>
+                      <div class="wysiwyg wysiwyg-one">
+                        {{ slide.text|e('wp_kses_post') }}
+                      </div>
+                    </div>
+                    {% if slide.link %}
+                      {{ button({
+                        markup: 'a',
+                        size: 'sm',
+                        theme: 'primary',
+                        title: slide.link.title,
+                        url: slide.link.url
+                      }) }}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {# Arrows #}
+      <div class="hidden md:flex absolute top-0 bottom-0 left-0 p-1 slideshow-prev items-center" data-role="slideshow-prev">
+        <button class="sr-only">prev</button>
+        <svg width="16" height="58" viewBox="0 0 16 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 1.167l-13 28 13 28" stroke="#264B5B" stroke-width="2"/></svg>
+      </div>
+      <div class="hidden md:flex absolute top-0 right-0 bottom-0 p-1 slideshow-next items-center" data-role="slideshow-next">
+        <button class="sr-only">next</button>
+        <svg width="16" height="58" viewBox="0 0 16 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 57.167l13-28-13-28" stroke="#264B5B" stroke-width="2"/></svg>
+      </div>
+    </div>
+    {# Pagination #}
+    <div class="slideshow-pagination flex justify-center items-center py-12" data-role="slideshow-pagination"></div>
+  </div>
+{% endmacro %}

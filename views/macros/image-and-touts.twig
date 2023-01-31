@@ -1,0 +1,25 @@
+{% macro imageAndTouts(data, options) %}
+  {# <div class="mb-56 container mx-auto px-4"> #}
+  <div class="container mx-auto px-4">
+    <div class="md:flex">
+      <div class="md:w-1/2">
+        <h3 class="mb-12 font-display font-bold text-xs uppercase tracking-widest text-gray-500">{{ data.heading|e }}</h3>
+        {% for tout in data.touts %}
+          <div class="mb-24 max-w-3xl">
+            <h4 class="mb-6 font-display font-medium text-xl text-green-200">{{ tout.title|e }}</h4>
+            <p class="mb-12 font-body font-normal text-tiny text-gray-500 leading-relaxed">{{ tout.text|e }}</p>
+            <a class="image-and-touts-links font-display font-semibold text-blue-400  hover:text-blue-300 transition duration-150 ease-in-out" href="{{ tout.link.url|e('esc_url')}}">
+            <div class="flex items-center">
+              <span class="mr-1">{{ tout.link.title|e }}</span>
+              <svg class="pb-1"width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.243 1.757L8.485 6l-4.242 4.243" stroke="#264B5B" stroke-width="2.5"/></svg>
+            </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="md:w-1/2">
+        <img role="presentation" class="width-full" src="{{ Image(data.image).src }}" alt="{{ Image(data.image).alt }}" />
+      </div>
+    </div>
+  </div>
+{% endmacro %}

@@ -1,0 +1,52 @@
+{% macro feature(data, options) %}
+  {% from 'macros/button.twig' import button %}
+  <div class="relative mb-56 md:mb-64 lg:mb-0">
+    <div class="container mx-auto px-24">
+    <h4 class="mb-10 md:mb-0 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ data.heading|e }}</h4>
+      <div class="flex">
+        <div class="w-1/4 md:w-1/2 pt-10">
+          <svg class="mb-24" width="12" height="91" viewBox="0 0 12 91" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.47 90.53a.75.75 0 001.06 0l4.773-4.773a.75.75 0 00-1.06-1.06L6 88.939l-4.243-4.242a.75.75 0 10-1.06 1.06L5.47 90.53zM5.25 0v90h1.5V0h-1.5z" fill="#A9D1D5"/></svg>
+        </div>
+        <div class="w-3/4 md:w-1/2 md:relative">
+          <div class="absolute">
+            <img class="pb-24" src="{{ Image(data.image).src('feature')|e('esc_url') }}" alt="{{ Image(data.image).alt|e }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="color-field-blue-bg-50-up"></div>
+  <div class="bg-blue-100 pt-40 pb-56">
+    <div class="container mx-auto px-24">
+      <div class="md:flex md:-mx-10 md:items-end">
+        <div class="md:w-1/2 md:px-10">
+          <blockquote>
+            <div class="mb-10">
+              <svg width="35" height="31" viewBox="0 0 35 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.944 30.28H.014V18.014c0-4.517.94-8.081 2.82-10.694C4.714 4.707 7.937 2.4 12.502.398l3.442 6.519c-2.807 1.318-4.748 2.636-5.822 3.955-1.075 1.293-1.673 2.832-1.795 4.614h7.617V30.28zm18.567 0h-15.93V18.014c0-4.517.94-8.081 2.82-10.694 1.88-2.612 5.102-4.92 9.668-6.921l3.442 6.519c-2.807 1.318-4.748 2.636-5.823 3.955-1.074 1.293-1.672 2.832-1.794 4.614h7.617V30.28z" fill="#A9D1D5" opacity=".75"/></svg>
+            </div>
+            <p class="max-w-xl md:max-w-full mb-20 font-display text-lg md:text-5xl text-blue-400">{{ data.quote|e }}</p>
+            <footer class="mb-24 md:mb-0 flex items-center">
+              <img class="rounded-full mr-10" src="{{ Image(data.attribution_image).src|e('esc_url') }}" alt="{{ Image(data.attribution_image).alt|e }}" />
+              <div>
+                <p class="font-body font-semibold text-tiny text-gray-500">{{ data.attribution_line_one|e }}</p>
+                <p class="font-body font-semibold text-tiny text-gray-100">{{ data.attribution_line_two|e }}</p>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+        <div class="md:w-1/2 md:px-10">
+          <div>
+            <p class="max-w-2xl mb-10 font-display font-semibold text-blue-500 text-base md:text-lg">{{ data.title|e }}</p>
+            {{ button({
+              markup: 'a',
+              size: 'lg',
+              theme: 'primary',
+              title: data.link.title,
+              url: data.link.url
+            }) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

@@ -1,0 +1,199 @@
+{% from 'macros/button.twig' import button %}
+
+<!doctype html>
+<html {{ site.language_attributes }}>
+  <head>
+    <meta charset="{{ site.charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% set faviconPath = '/public/favicons' %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ theme.link ~ faviconPath ~ '/apple-touch-icon.png'|e }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ theme.link ~ faviconPath ~ '/favicon-32x32.png'|e }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ theme.link ~ faviconPath ~ '/favicon-16x16.png'|e }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Work+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    {{ function('wp_head') }}
+  </head>
+   <body class="text-tiny">
+    <header class="relative bg-blue-100 pb-5" data-component="menu">
+      <div class="hidden md:flex container justify-end mx-auto px-16">
+        <div class="z-10 pb-12 -mt-1">
+          {{ button({
+            markup: 'a',
+            size: 'sm',
+            theme: 'tertiary',
+            title: options.login_utility.title,
+            url: options.login_utility.url
+          }) }}
+        </div>
+      </div>
+      <div class="z-10 container mx-auto pt-24 md:pt-0 px-16">
+        <div class="flex flex-wrap md:flex-no-wrap justify-between">
+          <div class="z-10 w-1/2 lg:w-1/6">
+            <a href="/">
+              <svg width="119" height="35" viewBox="0 0 119 35" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M79.318.17H72.33V35h6.99V.17zM69.318 0L50.767 34.915 32.273 0h7.926c.739 1.392 1.59 2.983 2.528 4.773.938 1.79 1.904 3.58 2.841 5.426a741.337 741.337 0 002.813 5.312 127.408 127.408 0 012.33 4.432c.795-1.506 1.704-3.21 2.727-5.17 1.022-1.932 2.045-3.864 3.04-5.767a2022.91 2022.91 0 012.783-5.313C60.114 2.073 60.767.823 61.25 0h8.068z" fill="#5D6160"/><path d="M28.551 28.097V17.528a10.18 10.18 0 00-.824-4.062 10.552 10.552 0 00-2.3-3.324c-.967-.966-2.103-1.704-3.41-2.244-1.307-.568-2.699-.824-4.176-.824-1.477 0-2.87.284-4.205.824-1.306.54-2.471 1.278-3.437 2.244a11.238 11.238 0 00-2.301 3.324c-.568 1.278-.824 2.614-.824 4.063 0 1.448.284 2.812.824 4.119a10.805 10.805 0 002.3 3.38c.967.966 2.131 1.705 3.438 2.245a11.09 11.09 0 004.205.824H25V35h-7.16c-2.442 0-4.743-.455-6.902-1.364a18.448 18.448 0 01-5.71-3.75c-1.62-1.619-2.927-3.494-3.836-5.596C.455 22.16 0 19.915 0 17.529c0-2.444.455-4.688 1.392-6.79a17.803 17.803 0 013.835-5.512 18.888 18.888 0 015.71-3.721c2.16-.91 4.46-1.364 6.904-1.364 2.471 0 4.801.455 6.932 1.364 2.13.909 4.005 2.159 5.625 3.721 1.619 1.563 2.869 3.41 3.807 5.512.937 2.102 1.392 4.346 1.392 6.79v17.443h-7.074v-6.875" fill="#70963D"/><path d="M111.165 28.097V17.528c0-1.448-.284-2.812-.824-4.062a10.546 10.546 0 00-2.301-3.324c-.966-.966-2.102-1.704-3.409-2.244a10.738 10.738 0 00-4.176-.824c-1.478 0-2.87.284-4.205.824-1.307.54-2.472 1.278-3.438 2.244a11.24 11.24 0 00-2.3 3.324c-.569 1.278-.825 2.614-.825 4.063 0 1.448.285 2.812.824 4.119a10.806 10.806 0 002.302 3.38c.965.966 2.13 1.705 3.437 2.245 1.335.54 2.727.824 4.205.824h7.159V35h-7.159c-2.444 0-4.745-.455-6.904-1.364a18.45 18.45 0 01-5.71-3.75 16.951 16.951 0 01-3.835-5.596c-.938-2.13-1.392-4.375-1.392-6.761 0-2.444.454-4.688 1.392-6.79a17.804 17.804 0 013.835-5.512c1.648-1.59 3.551-2.812 5.71-3.721 2.16-.91 4.46-1.364 6.904-1.364 2.471 0 4.801.455 6.931 1.364 2.131.909 4.034 2.159 5.625 3.721 1.62 1.563 2.87 3.41 3.807 5.512.938 2.102 1.392 4.346 1.392 6.79v17.443h-7.074v-6.875" fill="#5D6160"/></svg>
+            </a>
+          </div>
+          <div class="w-1/2 flex justify-end block lg:hidden">
+            <button class="trigger flex items-center font-display font-bold text-sm uppercase tracking-widest text-gray-500" data-role="menu-trigger">
+              <span class="mr-2" data-role="menu-trigger-text">Menu</span>
+              <svg class="trigger-icon pb-1" width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.485 4.243L5.243 8.485 1 4.243" stroke="#0076BC" stroke-width="2"/></svg>
+            </button>
+          </div>
+          <div class="viewport" data-role="menu-viewport">
+            <ul clas="pt-4">
+              {% for item in header_menu.items %}
+                <li class="menu-item relative block lg:inline-block md:ml-16 pb-12 xl:ml-30" data-role="menu-dropdown-trigger">
+                  <div class="hidden lg:block">
+                    <a class="nav-item {{ item.classes|join(' ') }}" href="{{ item.link|e('esc_url') }}">
+                      <span class="nav-text mr-2">{{ item.title|e('wp_kses_post') }}</span>
+                      {% if item.children %}
+                        <svg class="nav-icon pb-1" width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.485 4.243L5.243 8.485 1 4.243" stroke="#0076BC" stroke-width="2"/></svg>
+                      {% endif %}
+                    </a>
+                  </div>
+                  <div class="nav-item-mobile" data-role="menu-dropdown-trigger-outer">
+                    <a class="nav-item-mobile-link" href="{{ item.link|e('esc_url') }}">{{ item.title|e('wp_kses_post') }}</a>
+                    <button data-role="menu-dropdown-trigger-mobile">
+                      <svg class="nav-item-mobile-open" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 9H0V7h16v2z" fill="#0076BC"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 16V0h2v16H7z" fill="#0076BC"/></svg>
+                    </button>
+                  </div>
+                  {% if item.children %}
+                    <div class="dropdown" data-role="menu-dropdown">
+                      <ul>
+                        {% for child in item.children %}
+                          <li class="py-8 {% if not loop.last %}border-b border-tan-100{% endif %}">
+                            <a class="dropdown-link ml-16 lg:ml-0 flex items-center font-display font-medium text-blue-500 hover:text-blue-300 transition duration-150 ease-in-out" href="{{ child.link|e('esc_url') }}">
+                              <svg class="block lg:hidden mr-6" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.68 4.752c-.384 0-.736-.09-1.056-.272a2.303 2.303 0 01-.752-.752A2.105 2.105 0 01.6 2.672c0-.587.203-1.082.608-1.488A2.005 2.005 0 012.68.576c.597 0 1.099.203 1.504.608.405.406.608.902.608 1.488 0 .587-.203 1.083-.608 1.488-.405.395-.907.592-1.504.592z" fill="#0076BC"/></svg>
+                              <span class="mr-2 w-5/6 leading-snug">{{ child.title|e('wp_kses_post') }}</span>
+                              <div class="dropdown-arrow">
+                                <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.243 1l4.242 4.243-4.242 4.242" stroke="#0076BC" stroke-width="2"/></svg>
+                              </div>
+                            </a>
+                            {% if child.children %}
+                              <ul class="mt-6">
+                                {% for i in child.children %}
+                                  <li class="py-4 pl-4">
+                                   <a class="dropdown-link ml-16 lg:ml-0 flex items-center font-display font-medium text-blue-500 hover:text-blue-300 transition duration-150 ease-in-out" href="{{ i.link|e('esc_url') }}">
+                                      <svg class="mr-6" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.68 4.752c-.384 0-.736-.09-1.056-.272a2.303 2.303 0 01-.752-.752A2.105 2.105 0 01.6 2.672c0-.587.203-1.082.608-1.488A2.005 2.005 0 012.68.576c.597 0 1.099.203 1.504.608.405.406.608.902.608 1.488 0 .587-.203 1.083-.608 1.488-.405.395-.907.592-1.504.592z" fill="#0076BC"/></svg>
+                                      <span class="mr-2 w-5/6 leading-snug">{{ i.title|e('wp_kses_post') }}</span>
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+            <div class="flex md:hidden justify-center py-12">
+              {{ button({
+                markup: 'a',
+                size: 'sm',
+                theme: 'tertiary',
+                title: options.login_utility.title,
+                url: options.login_utility.url
+              }) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% block main %} {% endblock %}
+    {{ function('wp_footer') }}
+    <footer class="pt-40 border-t border-tan-100">
+      <div class="container mx-auto pb-32 px-12">
+        <div class="md:flex md:-mx-24">
+          <div class="md:w-1/6 md:px-24">
+            <a class="block mb-32" href="/">
+              <svg width="119" height="35" viewBox="0 0 119 35" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M79.318.17H72.33V35h6.99V.17zM69.318 0L50.767 34.915 32.273 0h7.926c.739 1.392 1.59 2.983 2.528 4.773.938 1.79 1.904 3.58 2.841 5.426a741.337 741.337 0 002.813 5.312 127.408 127.408 0 012.33 4.432c.795-1.506 1.704-3.21 2.727-5.17 1.022-1.932 2.045-3.864 3.04-5.767a2022.91 2022.91 0 012.783-5.313C60.114 2.073 60.767.823 61.25 0h8.068z" fill="#5D6160"/><path d="M28.551 28.097V17.528a10.18 10.18 0 00-.824-4.062 10.552 10.552 0 00-2.3-3.324c-.967-.966-2.103-1.704-3.41-2.244-1.307-.568-2.699-.824-4.176-.824-1.477 0-2.87.284-4.205.824-1.306.54-2.471 1.278-3.437 2.244a11.238 11.238 0 00-2.301 3.324c-.568 1.278-.824 2.614-.824 4.063 0 1.448.284 2.812.824 4.119a10.805 10.805 0 002.3 3.38c.967.966 2.131 1.705 3.438 2.245a11.09 11.09 0 004.205.824H25V35h-7.16c-2.442 0-4.743-.455-6.902-1.364a18.448 18.448 0 01-5.71-3.75c-1.62-1.619-2.927-3.494-3.836-5.596C.455 22.16 0 19.915 0 17.529c0-2.444.455-4.688 1.392-6.79a17.803 17.803 0 013.835-5.512 18.888 18.888 0 015.71-3.721c2.16-.91 4.46-1.364 6.904-1.364 2.471 0 4.801.455 6.932 1.364 2.13.909 4.005 2.159 5.625 3.721 1.619 1.563 2.869 3.41 3.807 5.512.937 2.102 1.392 4.346 1.392 6.79v17.443h-7.074v-6.875" fill="#70963D"/><path d="M111.165 28.097V17.528c0-1.448-.284-2.812-.824-4.062a10.546 10.546 0 00-2.301-3.324c-.966-.966-2.102-1.704-3.409-2.244a10.738 10.738 0 00-4.176-.824c-1.478 0-2.87.284-4.205.824-1.307.54-2.472 1.278-3.438 2.244a11.24 11.24 0 00-2.3 3.324c-.569 1.278-.825 2.614-.825 4.063 0 1.448.285 2.812.824 4.119a10.806 10.806 0 002.302 3.38c.965.966 2.13 1.705 3.437 2.245 1.335.54 2.727.824 4.205.824h7.159V35h-7.159c-2.444 0-4.745-.455-6.904-1.364a18.45 18.45 0 01-5.71-3.75 16.951 16.951 0 01-3.835-5.596c-.938-2.13-1.392-4.375-1.392-6.761 0-2.444.454-4.688 1.392-6.79a17.804 17.804 0 013.835-5.512c1.648-1.59 3.551-2.812 5.71-3.721 2.16-.91 4.46-1.364 6.904-1.364 2.471 0 4.801.455 6.931 1.364 2.131.909 4.034 2.159 5.625 3.721 1.62 1.563 2.87 3.41 3.807 5.512.938 2.102 1.392 4.346 1.392 6.79v17.443h-7.074v-6.875" fill="#5D6160"/></svg>
+            </a>
+          </div>
+          <div class="mb-24 md:mb-0 md:px-24">
+            <nav class="flex">
+              <ul class="w-1/2 mr-20">
+                {% for item in footer_menu_one.items %}
+                  <li class="mb-5">
+                    <a class="font-display font-bold text-blue-500 hover:text-blue-300 transition duration-150 ease-in-out" href="{{ item.link|e('esc_url') }}">{{ item.title|e('wp_kses_post') }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+              <ul class="w-1/2">
+                {% for item in footer_menu_two.items %}
+                  <li class="mb-5">
+                    <a class="font-body text-regular text-gray-500 hover:text-blue-300 transition duration-150 ease-in-out" href="{{ item.link|e('esc_url') }}">{{ item.title|e('wp_kses_post') }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+
+            <div class="flex mt-10">
+              <div class="w-1/2 mr-20">
+                {% if options.address and options.address.city and options.address.state and options.address.zip %}
+                  <p class="mb-4 font-display font-bold text-sm uppercase tracking-widest text-blue-400">Address:</p>
+                  <address class="not-italic text-gray-100 text-sm">
+                    {% if options.address.line_one %}{{ options.address.line_one|e }}{% endif %}{% if options.address.line_two %}{{ ', ' ~ options.address.line_two|e }} {% endif %}
+                    {{ options.address.city|e ~ ', ' ~ options.address.state|e ~ ' ' ~ options.address.zip|e }}
+                  </address>
+                {% endif %}
+              </div>
+              <div class="w-1/2">
+                {% if options.phone_number and options.phone_number.html_phone_number and options.phone_number.display_phone_number %}
+                  <p class="mb-4 font-display font-bold text-sm uppercase tracking-widest text-blue-400">Phone:</p>
+                  <p><a class="text-gray-100 text-sm hover:text-blue-300 transition duration-150 ease-in-out" href="{{ 'tel:+' ~ options.phone_number.html_phone_number|e }}">{{ options.phone_number.display_phone_number|e('wp_kses_post') }}</a></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="md:px-24">
+            <div class="mb-24">
+              {% if options.newsletter and options.newsletter.title and options.newsletter.text %}
+                <p class="mb-4 font-display text-lg text-blue-400 font-semibold">{{ options.newsletter.title|e }}</p>
+                <p class="max-w-2xl mb-3 text-gray-100">{{ options.newsletter.text|e }}</p>
+              {% endif %}
+              <iframe src="http://go.pardot.com/l/858893/2020-05-07/ln3q" width="100%" height="200" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-tan-100 py-16">
+        <div class="container mx-auto px-12">
+          <div class="md:flex md:justify-between">
+            <div class="md:flex md:order-last">
+              {% if options.social or options.social.twitter or options.social.linkedin %}
+                <ul class="flex mr-24 mb-10 md:mb-0">
+                  {% if options.social.twitter %}
+                    <li class="mr-4">
+                      <a class="flex items-center justify-center block w-12 h-12 bg-blue-500 rounded-full" href="{{ options.social.twitter|e('esc_url') }}" target="_blank" rel="noopener noreferrer">
+                        <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.97 3.348c.005.108.007.217.007.326 0 3.337-2.653 7.183-7.505 7.183A7.71 7.71 0 01.429 9.723c.206.023.416.036.629.036a5.445 5.445 0 003.276-1.081c-1.154-.02-2.129-.75-2.464-1.754a2.77 2.77 0 001.191-.043C1.855 6.65.945 5.63.945 4.406v-.032c.356.19.763.303 1.195.316C1.432 4.237.966 3.464.966 2.589c0-.464.13-.897.358-1.27 1.3 1.528 3.244 2.533 5.436 2.638a2.436 2.436 0 01-.068-.575C6.692 1.988 7.873.857 9.33.857a2.69 2.69 0 011.926.797 5.415 5.415 0 001.674-.613 2.555 2.555 0 01-1.16 1.397 5.45 5.45 0 001.516-.397c-.354.506-.801.95-1.316 1.307z" fill="#fff"/></svg>
+                      </a>
+                    </li>
+                  {% endif %}
+                  {% if options.social.linkedin %}
+                    <li>
+                      <a class="flex items-center justify-center block w-12 h-12 bg-blue-500 rounded-full" href="{{ options.social.linkedin|e('esc_url') }}" target="_blank" rel="noopener noreferrer">
+                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.082 3.306a1.653 1.653 0 100-3.306 1.653 1.653 0 000 3.306zM10.127 4.298c-1.323 0-2.205.624-2.535 1.322V4.408H5.204v8.45h2.572V8.78c0-1.36.514-2.241 1.726-2.241.882 0 1.212.808 1.212 2.24v4.078h2.572V8.192c0-2.535-.588-3.894-3.16-3.894zM3.367 4.408H.796v8.45h2.571v-8.45z" fill="#fff"/></svg>
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+              <nav class="mb-10 md:mb-0">
+                <ul>
+                  {% for item in footer_menu_three.items %}
+                    <li class="md:ml-10 inline-block ">
+                      <a class="text-gray-100 text-sm hover:text-blue-300 transition duration-150 ease-in-out" href="{{ item.link|e('esc_url') }}">{{ item.title|e('wp_kses_post') }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </nav>
+            </div>
+            <p class="text-body text-sm text-gray-100">&copy;{{ "now"|date("Y") ~ ' AVIA — All rights reserved' }}</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

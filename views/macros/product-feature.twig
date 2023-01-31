@@ -1,0 +1,54 @@
+{% macro productFeature(data, options) %}
+  {% from 'macros/button.twig' import button %}
+  <div class="mb-24">
+    {% if data.text or data.title %}
+      <div class="container mx-auto px-12 md:px-24 py-24">
+        <div class="flex md:-mx-12">
+          <div class="md:w-1/2 md:px-12">
+            {% if data.title %}
+              <h4 class="mb-20 font-display font-normal text-5xl text-blue-500">{{ data.title|e }}</h4>
+            {% endif %}
+            {% if data.text %}
+              <p class="font-body text-tiny text-gray-200">{{ data.text|e }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <div class="color-field-tan-bg-50 -mb-2"></div>
+    <div class="bg-tan-50 py-32">
+      <div class="container mx-auto px-12 md:px-24">
+        <div class="md:flex md:-mx-12">
+          <div class="md:w-1/2 md:px-12">
+            <div>
+              <p class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ data.heading|e }}</p>
+            </div>
+            {% for item in data.feature %}
+              <div class="mb-12 md:flex md:-mx-5">
+                <div class="md:px-5 md:w-1/6">
+                  <img class="mb-10 md:mb-0" src="{{ Image(item.image).src|e('esc_url') }}" alt="{{ Image(item.image).alt|e }}" />
+                </div>
+                <div class="wysiwyg md:px-5 md:w-5/6">
+                  {{ item.text|e('wp_kses_post') }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="md:w-1/2 md:px-12 md:relative">
+            <div class="xl:absolute xl:bottom-0">
+              <img src="{{ Image(data.image).src|e('esc_url') }}" alt="{{ Image(data.image).alt|e }}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-center bg-tan-50 pb-24">
+    {{ button({
+        markup: 'a',
+        theme: 'secondary',
+        title: data.link.title,
+        url: data.link.url
+      }) }}
+    </div>
+  </div>
+{% endmacro %}

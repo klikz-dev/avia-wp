@@ -1,0 +1,12 @@
+{% macro headingAndImage(data, options) %}
+  <div class="container mx-auto px-10 md:px-48 mb-8">
+    <div class="flex flex-col md:flex-row md:-mx-24 items-center">
+      <div class="md:w-4/6 md:px-24 wysiwyg-five mb-10">
+        {{ data.text|e('wp_kses_post') }}
+      </div>
+      <div class="md:w-2/6 md:px-24">
+        <img src="{{ Image(data.image).src|e('esc_url') }}" alt="{{ Image(data.image).alt|e }}" />
+      </div>
+    </div>
+  </div>
+{% endmacro %}

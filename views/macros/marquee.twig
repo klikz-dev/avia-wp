@@ -1,0 +1,20 @@
+{% macro marquee(data, options) %}
+  <div>
+    <div class="bg-blue-100 pt-2 pb-10">
+      <div class="container mx-auto px-2">
+        <div class="text-center">
+          <h1 class="sr-only">{{ data.page.title|e('wp_kses_post') }}</h1>
+          <p class="max-w-4xl mx-auto mb-8 font-display font-bold text-sm uppercase tracking-widest text-gray-500">
+            {% if data.parent.slug != data.page.slug %}
+              <a href="{{ data.parent.slug }}">{{ data.parent.title|e('wp_kses_post') }}</a> <span class="text-xs">/</span>
+            {% endif %}
+            <a href="{{ data.page.slug|e('esc_url') }}">{{ data.page.title|e('wp_kses_post') }}</a>
+          </p>
+          <h2 class="px-2 md:px-40 mb-10 mx-auto font-display font-medium text-4xl md:text-5xl text-blue-400 leading-tight">{{ data.title|e('wp_kses_post') }}</h2>
+          <p class="px-2 md:px-32 md:px-0 max-w-7xl mx-auto font-display font-normal text-base text-gray-500 leading-relaxed">{{ data.text|e('wp_kses_post') }}</p>
+        </div>
+      </div>
+    </div>
+  <div class="color-field-blue-bg-25"></div>
+  </div>
+{% endmacro %}

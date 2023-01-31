@@ -1,0 +1,20 @@
+{% macro blockquote(data, options) %}
+  <blockquote class="mb-20">
+    <svg class="mb-10" width="35" height="31" viewBox="0 0 35 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.944 30.28H.014V18.014c0-4.517.94-8.081 2.82-10.694C4.714 4.707 7.937 2.4 12.502.398l3.442 6.519c-2.807 1.318-4.748 2.636-5.822 3.955-1.075 1.293-1.673 2.832-1.795 4.614h7.617V30.28zm18.567 0h-15.93V18.014c0-4.517.94-8.081 2.82-10.694 1.88-2.612 5.102-4.92 9.668-6.921l3.442 6.519c-2.807 1.318-4.748 2.636-5.823 3.955-1.074 1.293-1.672 2.832-1.794 4.614h7.617V30.28z" fill="#A9D1D5" opacity=".75"/></svg>
+    <p class="font-display text-xl text-blue-500
+    {% if data.attribution_line_one or data.attribution_line_two %}
+      mb-10
+    {% endif %}
+    ">{{ data.quote|e }}</p>
+    {% if data.attribution_line_one or data.attribution_line_two %}
+      <footer class="mb-24 md:mb-0">
+        {% if data.attribution_line_one %}
+          <p class="font-body font-semibold text-tiny text-gray-500">{{ data.attribution_line_one|e }}</p>
+        {% endif %}
+        {% if data.attribution_line_two %}
+          <p class="font-body font-semibold text-tiny text-gray-100">{{ data.attribution_line_two|e }}</p>
+        {% endif %}
+      </footer>
+    {% endif %}
+  </blockquote>
+{% endmacro %}

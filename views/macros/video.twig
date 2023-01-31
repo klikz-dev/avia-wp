@@ -1,0 +1,17 @@
+{% macro video(data, options) %}
+  <div class="container mx-auto mb-24 px-12 md:px-24">
+    <div class="relative mb-24" data-component="video">
+      <div class="video-placeholder" data-role="video-placeholder" style="background-image: url('{{ Image(data.video_placeholder).src }}');">
+        <button data-role="video-play" class="h-40 w-40 flex justify-center items-center bg-blue-200 rounded-full font-display text-xs text-blue-400 font-bold tracking-widest uppercase">
+          <div class="flex items-center">
+            <svg class="mr-3" width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 5L.25 9.33V.67L7 5z" fill="#264B5B"/></svg>
+            <span>Play</span>
+          </div>
+        </button>
+      </div>
+      <div data-role="video-frame">
+        <iframe src="{{ data.embed_url|e('esc_url') }}"></iframe>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

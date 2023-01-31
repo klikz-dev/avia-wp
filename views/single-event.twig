@@ -1,0 +1,60 @@
+{% from 'macros/media-two.twig' import mediaTwo %}
+
+{% extends 'base.twig' %}
+
+{% block main %}
+  <div class="bg-blue-100 pb-12">
+    <div class="container mx-auto px-12 md:px-24">
+      <div class="md:flex md:-mx-10">
+        <div class="md:w-full md:px-10">
+          <p class="mb-10 md:mb-16 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ _e('Events') }}</p>
+          <h1 class="max-w-6xl mb-10 font-display font-regular text-5xl text-blue-500 leading-snug">{{ post.title|e('wp_kses_post') }}</h1>
+          <time class="md:mb-2 text-sm font-semibold text-gray-500">{{ post.custom_date|e }}</time>
+          <p class="text-tiny font-semibold text-gray-500">{{ post.byline|e }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="color-field-blue-bg-25 -mt-1 md:mb-32"></div>
+    <div class="mb-40">
+    <div class="container mx-auto px-12 0md:px-24">
+      <div class="md:flex md:-mx-24">
+        <div class="md:w-4/6 md:px-24">
+          <div class="wysiwyg wysiwyg-one">
+            {{ post.content|e('wp_kses_post') }}
+          </div>
+        </div>
+        <div class="md:w-2/6 md:px-24">
+          <h3 class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ _e('Popular Topics') }}</h3>
+          <ul class="mb-32">
+            {% for category in categories %}
+              <li class="mb-4">
+                <a class="flex items-center font-body font-medium text-tiny" href="{{ 'events/' ~ '?event-topic=' ~ category.slug|e }}">
+                  <svg class="mr-8" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.68 4.752c-.384 0-.736-.09-1.056-.272a2.303 2.303 0 01-.752-.752A2.105 2.105 0 01.6 2.672c0-.587.203-1.082.608-1.488A2.005 2.005 0 012.68.576c.597 0 1.099.203 1.504.608.405.406.608.902.608 1.488 0 .587-.203 1.083-.608 1.488-.405.395-.907.592-1.504.592z" fill="#0076BC"/></svg>
+                  <span>{{ category.name|e }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% for item in post.meta('sidebar') %}
+            {% if item.acf_fc_layout == 'featured_posts' %}
+             <h3 class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ _e('Popular Posts') }}</h3>
+              {% for i in item.posts %}
+                {% set image = Image(i.image) %}
+                {{ mediaTwo({
+                  title: i.title,
+                  date: i.date,
+                  url: i.link
+                }) }}
+              {% endfor %}
+            {% elseif item.acf_fc_layout == 'rich_text' %}
+              <div class="mb-20 wysiwyg wysiwyg-one">
+                {{ item.text|e('wp_kses_post') }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

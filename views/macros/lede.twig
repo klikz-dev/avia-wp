@@ -1,0 +1,18 @@
+{% macro lede(data, options) %}
+{% from 'macros/button.twig' import button %}
+  <div class="container mx-auto px-4 mb-48">
+    <div class="text-center">
+      <div class="mb-12">
+        <h3 class="mb-12 px-12 md:px-0 font-display font-medium text-lg md:text-xl text-blue-500">{{ data.title|e }}</h3>
+        <p class="max-w-4xl px-12 md:px-0 mx-auto leading-loose text-gray-500">{{ data.text|e }}
+      </div>
+      {{ button({
+        markup: 'a',
+        size: 'sm',
+        theme: 'secondary',
+        title: data.link.title,
+        url: data.link.url
+      }) }}
+    </div>
+  </div>
+{% endmacro %}

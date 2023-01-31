@@ -1,0 +1,98 @@
+{% from 'macros/banner-callout.twig' import bannerCallout %}
+{% from 'macros/button.twig' import button %}
+{% from 'macros/callout.twig' import callout %}
+{% from 'macros/callout-aside.twig' import calloutAside %}
+{% from 'macros/feature.twig' import feature %}
+{% from 'macros/form.twig' import form %}
+{% from 'macros/full-width-tout.twig' import fullWidthTout %}
+{% from 'macros/heading-and-image.twig' import headingAndImage %}
+{% from 'macros/image.twig' import image %}
+{% from 'macros/image-grid.twig' import imageGrid %}
+{% from 'macros/image-and-image-grid.twig' import imageAndImageGrid %}
+{% from 'macros/image-and-text.twig' import imageAndText %}
+{% from 'macros/image-and-touts.twig' import imageAndTouts %}
+{% from 'macros/lede.twig' import lede %}
+{% from 'macros/quote.twig' import quote %}
+{% from 'macros/multiple-callouts.twig' import multipleCallouts %}
+{% from 'macros/multiple-touts.twig' import multipleTouts %}
+{% from 'macros/people.twig' import people %}
+{% from 'macros/podcast.twig' import podcast %}
+{% from 'macros/product-feature.twig' import productFeature %}
+{% from 'macros/rich-text.twig' import richText %}
+{% from 'macros/slideshow.twig' import slideshow %}
+{% from 'macros/slideshow-grid.twig' import slideshowGrid %}
+{% from 'macros/slideshow-two-col.twig' import slideshowTwoCol %}
+{% from 'macros/steps.twig' import steps %}
+{% from 'macros/two-column.twig' import twoColumn %}
+{% from 'macros/video.twig' import video %}
+{% from 'macros/video-content.twig' import videoContent %}
+{% from 'macros/featured-columns.twig' import featuredColumns %}
+{% from 'macros/image-and-cta.twig' import imageCTA %}
+{% from 'macros/featured-posts.twig' import featuredPosts %}
+{% from 'macros/bullets.twig' import bullets %}
+
+{% for component in post.meta('components') %}
+  {% if component.acf_fc_layout == 'form' %}
+    {{ form(component) }}
+  {% elseif component.acf_fc_layout == 'heading_and_image' %}
+    {{ headingAndImage(component) }}
+  {% elseif component.acf_fc_layout == 'image' %}
+    {{ image(component) }}
+  {% elseif component.acf_fc_layout == 'image_grid' %}
+    {{ imageGrid(component) }}
+  {% elseif component.acf_fc_layout == 'video_content' %}
+    {{ videoContent(component) }}
+  {% elseif component.acf_fc_layout == 'image_and_image_grid' %}
+    {{ imageAndImageGrid(component) }}
+  {% elseif component.acf_fc_layout == 'callout_aside' %}
+    {{ calloutAside(component) }}
+  {% elseif component.acf_fc_layout == 'banner_callout' %}
+    {{ bannerCallout(component) }}
+  {% elseif component.acf_fc_layout == 'full_width_tout' %}
+    {{ fullWidthTout(component) }}
+  {% elseif component.acf_fc_layout == 'two_column' %}
+    {{ twoColumn(component) }}
+  {% elseif component.acf_fc_layout == 'slideshow_two_column' %}
+    {{ slideshowTwoCol(component) }}
+  {% elseif component.acf_fc_layout == 'image_and_text' %}
+    {{ imageAndText(component) }}
+  {% elseif component.acf_fc_layout == 'product_feature' %}
+    {{ productFeature(component) }}
+  {% elseif component.acf_fc_layout == 'steps' %}
+    {{ steps(component) }}
+  {% elseif component.acf_fc_layout == 'quote' %}
+    {{ quote(component) }}
+  {% elseif component.acf_fc_layout == 'rich_text' %}
+    {{ richText(component) }}
+  {% elseif component.acf_fc_layout == 'slideshow' %}
+    {{ slideshow(component) }}
+  {% elseif component.acf_fc_layout == 'slideshow_grid' %}
+    {{ slideshowGrid(component) }}
+  {% elseif component.acf_fc_layout == 'callout' %}
+    {{ callout(component) }}
+  {% elseif component.acf_fc_layout == 'people' %}
+    {{ people(component) }}
+  {% elseif component.acf_fc_layout == 'feature' %}
+   {{ feature(component) }}
+  {% elseif component.acf_fc_layout == 'podcast' %}
+    {{ podcast(component) }}
+  {% elseif component.acf_fc_layout == 'image_and_touts' %}
+    {{ imageAndTouts(component) }}
+  {% elseif component.acf_fc_layout == 'multiple_touts' %}
+    {{ multipleTouts(component) }}
+  {% elseif component.acf_fc_layout == 'multiple_callouts' %}
+    {{ multipleCallouts(component) }}
+  {% elseif component.acf_fc_layout == 'lede' %}
+    {{ lede(component) }}
+  {% elseif component.acf_fc_layout == 'video' %}
+    {{ video(component) }}
+  {% elseif component.acf_fc_layout == 'featured_columns' %}
+    {{ featuredColumns(component) }}
+  {% elseif component.acf_fc_layout == 'image_and_cta' %}
+    {{ imageCTA(component) }}
+  {% elseif component.acf_fc_layout == 'featured_posts' %}
+    {{ featuredPosts(component) }}
+  {% elseif component.acf_fc_layout == 'bullets' %}
+   {{ bullets(component) }}
+  {% endif %}
+{% endfor %}

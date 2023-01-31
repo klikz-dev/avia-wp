@@ -1,0 +1,68 @@
+{% macro twoColumn(data, options) %}
+{% from 'macros/blockquote.twig' import blockquote %}
+{% from 'macros/button.twig' import button %}
+{% from 'macros/media-two.twig' import mediaTwo %}
+{% from 'macros/people-grid.twig' import peopleGrid %}
+{% from 'macros/comparison-table.twig' import comparisonTable %}
+{% from 'macros/inline-image-text-list.twig' import inlineList %}
+ <div class="container mx-auto lg:px-32 mb-8">
+  <div class="md:flex md:-mx-24 px-12">
+    <div class="md:w-4/6 md:px-24">
+      {% for component in data.body %}
+        {% if component.acf_fc_layout == 'rich_text' %}
+          <div class="wysiwyg wysiwyg-two">
+            {{ component.text|e('wp_kses_post') }}
+          </div>
+        {% elseif component.acf_fc_layout == 'embed' %}
+          <div class="mb-24">
+            {{ component.embed }}
+          </div>
+        {% elseif component.acf_fc_layout == 'people' %}
+          {{ peopleGrid(component) }}
+        {% elseif component.acf_fc_layout == 'quote' %}
+          {{ blockquote(component) }}
+        {% elseif component.acf_fc_layout == 'comparison_table' %}
+          {{ comparisonTable(component) }}
+        {% elseif component.acf_fc_layout == 'inline_image_text_list' %}
+          {{ inlineList(component) }}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="md:w-2/6 md:px-24 py-16">
+      {% for component in data.sidebar %}
+        {% if component.acf_fc_layout == 'callout' %}
+          <div class="mb-8">
+            {% if component.image %}
+            <img class="mb-10" src="{{ Image(component.image).src|e('esc_url') }}" alt="{{ Image(component.image).alt|e }}" />
+            {% endif %}
+            <h5 class="mb-8 font-display font-medium text-lg text-blue-500">{{ component.title|e }}</h5>
+            <p class="mb-10 font-body text-gray-500">{{ component.text|e }}</p>
+            {{ button({
+              markup: 'a',
+              size: 'sm',
+              theme: 'tertiary',
+              title: component.link.title,
+              url: component.link.url
+            }) }}
+          </div>
+        {% elseif component.acf_fc_layout == 'featured_insights' %}
+          <h3 class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ _e('Related Insights') }}</h3>
+          {% for item in component.posts %}
+            {% set post = Post(item) %}
+            {{ mediaTwo({
+              title: post.title,
+              date: post.date,
+              byline: post.byline,
+              url: post.link,
+              image: {
+                src: Image(post.image).src('insight_thumbnail_related_aside'),
+                alt: Image(post.image).alt
+              }
+            }) }}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endmacro %}

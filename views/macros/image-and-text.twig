@@ -1,0 +1,17 @@
+{% macro imageAndText(data, options) %}
+  <div class="container mx-auto mb-64">
+    <div class="md:flex -mx-12 px-12 md:px-24">
+      <div class="md:w-1/2 px-12 {% if data.image_position == 'right' %}order-last{% endif %}">
+        <img class="mb-10 mb:mb-24" src="{{ Image(data.image).src|e('esc_url') }}" alt="{{ Image(data.image).alt|e }}" />
+      </div>
+      <div class="md:w-1/2 px-12">
+        <h4 class="mb-10 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ data.title|e }}</h4>
+        <p class="mb-3 md:mb-12 font-display text-lg md:text-xl text-green-200">{{ data.heading|e }}</p>
+        <p class="mb-10 md:mb-20 font-display text-tiny md:text-base font-medium">{{ data.lede|e }}</p>
+        <div class="wysiwyg wysiwyg-one">
+          {{ data.text|e('wp_kses_post') }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

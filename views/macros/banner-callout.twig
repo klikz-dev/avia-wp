@@ -1,0 +1,17 @@
+{% macro bannerCallout(data, options) %}
+{% from 'macros/button.twig' import button %}
+<div class="color-field-blue-bg-50-up -mb-1"></div>
+<div class="bg-blue-50 py-24 md:py-32 {% if data.bottom_spacing %}mb-32{% endif %}">
+  <div class="container mx-auto text-center px-10">
+    <p class="mb-20 font-display font-bold text-sm uppercase tracking-widest text-gray-500">{{ data.heading|e }}</p>
+    <p class="mb-20 font-display text-lg md:text-5xl font-medium text-blue-500">{{ data.title|e }}</p>
+    {{ button({
+      markup: 'a',
+      theme: 'primary',
+      title: data.link.title,
+      url: data.link.url
+    }) }}
+  </div>
+</div>
+
+{% endmacro %}

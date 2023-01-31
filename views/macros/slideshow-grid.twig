@@ -1,0 +1,57 @@
+{% macro slideshowGrid(data, options) %}
+  <div class="color-field-tan-bg-100 -mb-1"></div>
+  <div class="bg-tan-50 py-56"></div>
+  <div class="py-24 mb-24 grid-slides">
+    <h4 class="text-center font-display font-bold text-xs uppercase tracking-widest text-gray-500">Our Team</h4>
+    <div data-grid-slideshow>
+      <div class="swiper-container items-center" data-grid-slideshow-slides>
+        <div class="swiper-wrapper items-center">
+          {% for slide in data.slides %}
+            {% if slide.slide_layout == 'primary' %}
+                <div class="grid-slide swiper-slide">
+                <div class="flex justify-center items-center mb-24">
+                  {% for img in slide.images %}
+                    <div>
+                      <img src="{{ Image(img).src|e('esc_url') }}" alt="{{ Image(img).alt|e }}" />
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% elseif slide.slide_layout == 'quaternary' %}
+              <div class="grid-slide swiper-slide">
+                <div class="flex flex-row items-end">
+                  <div class="mr-24">
+                    <img class="mb-4" src="{{ Image(slide.images[0]).src|e('esc_url') }}" alt="{{ Image(slide.images[0]).alt|e }}" />
+                  </div>
+                  <div>
+                    <img class="mb-4" src="{{ Image(slide.images[1]).src|e('esc_url') }}" alt="{{ Image(slide.images[1]).alt|e }}" />
+                  </div>
+                </div>
+                 <div class="flex flex-row mb-24">
+                  <div class="mr-4">
+                    <img src="{{ Image(slide.images[2]).src|e('esc_url') }}" alt="{{ Image(slide.images[2]).alt|e }}" />
+                  </div>
+                  <div>
+                    <img src="{{ Image(slide.images[3]).src|e('esc_url') }}" alt="{{ Image(slide.images[3]).alt|e }}" />
+                  </div>
+                </div>
+              </div>
+            {% elseif slide.slide_layout == 'tertiary' %}
+              <div class="grid-slide swiper-slide">
+                <div class="flex flex-row items-end -mx-4">
+                  <div class="mb-10 px-4">
+                    <img src="{{ Image(slide.images[0]).src|e('esc_url') }}" alt="{{ Image(slide.images[0]).alt|e }}" />
+                  </div>
+                  <div class="px-4">
+                    <img class="mb-6" src="{{ Image(slide.images[1]).src|e('esc_url') }}" alt="{{ Image(slide.images[1]).alt|e }}" />
+                    <img src="{{ Image(slide.images[2]).src|e('esc_url') }}" alt="{{ Image(slide.images[2]).alt|e }}" />
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
